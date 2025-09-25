@@ -1,66 +1,1023 @@
-# GEMINI PRO CLI - CODE QUALITY AUDIT PROMPT
+                                       ^^^^^
+lib/screens/dashboard_screen.dart:614:52: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is  
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    borderColor: AppColors.primary.withOpacityRatio(0.4),
+                                                   ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:997:47: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is  
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                backgroundColor: Colors.white.withOpacityRatio(0.18),
+                                              ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1016:45: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        color: Colors.white.withOpacityRatio(0.85),
+                                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1046:37: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                color: Colors.white.withOpacityRatio(0.92),
+                                    ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1051:37: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                color: Colors.white.withOpacityRatio(0.92),
+                                    ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1086:51: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        borderColor: Colors.white.withOpacityRatio(0.6),
+                                                  ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1124:22: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        color: color.withOpacityRatio(0.22),
+                     ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1126:48: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        border: Border.all(color: Colors.white.withOpacityRatio(0.32)),
+                                               ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1212:43: Error: Member not found: 'cardBorder'.
+              Border.all(color: AppColors.cardBorder.withOpacityRatio(0.85)),
+                                          ^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1244:34: Error: Member not found: 'slate'.
+                color: AppColors.slate.withOpacityRatio(0.7),
+                                 ^^^^^
+lib/screens/dashboard_screen.dart:1209:31: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+          color: Colors.white.withOpacityRatio(0.95),
+                              ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1264:21: Error: Member not found: 'mint'.
+        : AppColors.mint.withOpacityRatio(0.45);
+                    ^^^^
+lib/screens/dashboard_screen.dart:1267:29: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        : AppColors.primary.withOpacityRatio(0.35);
+                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1325:45: Error: Member not found: 'cardBorder'.
+        border: Border.all(color: AppColors.cardBorder.withOpacityRatio(0.85)),
+                                            ^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1380:72: Error: Member not found: 'slate'.
+                    GoogleFonts.inter(fontSize: 13.5, color: AppColors.slate),
+                                                                       ^^^^^
+lib/screens/dashboard_screen.dart:1402:34: Error: Member not found: 'slate'.
+                color: AppColors.slate.withOpacityRatio(0.65),
+                                 ^^^^^
+lib/screens/dashboard_screen.dart:1345:48: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    color: AppColors.secondary.withOpacityRatio(0.2),
+                                               ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1386:56: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    size: 16, color: AppColors.primary.withOpacityRatio(0.8)),
+                                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1392:46: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    color: AppColors.primary.withOpacityRatio(0.8),
+                                             ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:43:45: Error: Member not found: 'adminHeaderGradient'.
+                        gradient: AppColors.adminHeaderGradient,
+                                            ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:80:58: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is   
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                                            Colors.white.withOpacityRatio(0.88),
+                                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:242:44: Error: Member not found: 'adminButtonGradient'.
+            gradient: selected ? AppColors.adminButtonGradient : null,
+                                           ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:304:30: Error: Member not found: 'adminSecondaryLight'.
+            color: AppColors.adminSecondaryLight.withOpacityRatio(0.65),
+                             ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:321:30: Error: Member not found: 'slate'.
+            color: AppColors.slate.withOpacityRatio(0.7),
+                             ^^^^^
+lib/widgets/ksu_button.dart:37:44: Error: Member not found: 'buttonGradient'.
+      baseGradient = gradient ?? AppColors.buttonGradient;
+                                           ^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:42:35: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            .map((color) => color.withOpacityRatio(enabled ? 1 : 0.55))
+                                  ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:43:14: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<Color>'.
+ - 'List' is from 'dart:core'.
+ - 'Color' is from 'dart:ui'.
+            .toList(),
+             ^
+lib/widgets/ksu_button.dart:48:26: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        backgroundColor?.withOpacityRatio(enabled ? 1 : 0.6);
+                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:51:40: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            ? baseGradient.colors.last.withOpacityRatio(enabled ? 0.28 : 0.18)
+                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:53:18: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                .withOpacityRatio(enabled ? 0.32 : 0.22));
+                 ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_card.dart:22:30: Error: Member not found: 'cardBorder'.
+            color: AppColors.cardBorder.withOpacityRatio(0.8), width: 1.2),
+                             ^^^^^^^^^^
+lib/widgets/ksu_card.dart:25:30: Error: Member not found: 'cardShadow'.
+            color: AppColors.cardShadow,
+                             ^^^^^^^^^^
+lib/widgets/ksu_card.dart:19:29: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more      
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        color: Colors.white.withOpacityRatio(0.94),
+                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+Performing hot reload...                                                
+Try again after fixing the above error(s).
 
-Act as an expert code auditor and quality assurance specialist. Perform comprehensive analysis on the provided code/content.
+lib/theme/app_theme.dart:65:39: Error: The argument type 'CardThemeData' can't be assigned to the parameter type 'CardTheme'.
+ - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart').
+ - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart'). 
+      cardTheme: _buildCardTheme(base.cardTheme),
+                                      ^
+lib/theme/app_theme.dart:92:80: Error: The method 'copyWith' isn't defined for the class 'ElevatedButtonThemeData'.
+ - 'ElevatedButtonThemeData' is from 'package:flutter/src/material/elevated_button_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/elevated_button_theme.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'copyWith'.
+      elevatedButtonTheme: _buildElevatedButtonTheme(base.elevatedButtonTheme).copyWith(
+                                                                               ^^^^^^^^
+lib/theme/app_theme.dart:98:39: Error: The argument type 'CardThemeData' can't be assigned to the parameter type 'CardTheme'.
+ - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart').
+ - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart'). 
+      cardTheme: _buildCardTheme(base.cardTheme),
+                                      ^
+lib/theme/app_theme.dart:99:68: Error: The method 'copyWith' isn't defined for the class 'TextButtonThemeData'.
+ - 'TextButtonThemeData' is from 'package:flutter/src/material/text_button_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/text_button_theme.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'copyWith'.
+      textButtonTheme: _buildTextButtonTheme(base.textButtonTheme).copyWith(
+                                                                   ^^^^^^^^
+lib/widgets/background_pattern.dart:26:59: Error: Member not found: 'backgroundGradient'.
+      decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
+                                                          ^^^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:62:38: Error: Member not found: 'gold'.
+              borderColor: AppColors.gold.withOpacityRatio(0.22),
+                                     ^^^^
+lib/widgets/background_pattern.dart:38:40: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.primary.withOpacityRatio(0.18),
+                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:46:42: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.secondary.withOpacityRatio(0.22),
+                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:54:42: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.secondary.withOpacityRatio(0.16),
+                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:75:38: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        Colors.white.withOpacityRatio(0.08),
+                                     ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:77:38: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        Colors.white.withOpacityRatio(0.08),
+                                     ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:99:26: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            color: color.withOpacityRatio(0.4),
+                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:142:27: Error: Member not found: 'gold'.
+      ..color = AppColors.gold.withOpacityRatio(opacity)
+                          ^^^^
+lib/screens/admin_dashboard_screen.dart:518:56: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and       
+neither is more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            Border.all(color: AppColors.adminAccentRed.withOpacityRatio(0.4)),
+                                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:712:47: Error: Member not found: 'adminButtonGradient'.
+                          gradient: AppColors.adminButtonGradient,
+                                              ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:755:28: Error: Member not found: 'slate'.
+          color: AppColors.slate.withOpacity(0.7),
+                           ^^^^^
+lib/screens/admin_dashboard_screen.dart:791:28: Error: Member not found: 'adminSecondaryLight'.
+          color: AppColors.adminSecondaryLight,
+                           ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:966:24: Error: Member not found: 'adminSecondaryLight'.
+      color: AppColors.adminSecondaryLight.withOpacity(0.3),
+                       ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:985:55: Error: Member not found: 'slate'.
+                          ?.copyWith(color: AppColors.slate)),
+                                                      ^^^^^
+lib/screens/admin_dashboard_screen.dart:996:49: Error: Member not found: 'slate'.
+                    ?.copyWith(color: AppColors.slate.withOpacity(0.9)),
+                                                ^^^^^
+lib/screens/dashboard_screen.dart:230:45: Error: Member not found: 'cardBorder'.
+        border: Border.all(color: AppColors.cardBorder.withOpacityRatio(0.9)),
+                                            ^^^^^^^^^^
+lib/screens/dashboard_screen.dart:235:31: Error: Member not found: 'buttonGradient'.
+          gradient: AppColors.buttonGradient,
+                              ^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:228:29: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is  
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        color: Colors.white.withOpacityRatio(0.78),
+                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:385:30: Error: Member not found: 'slate'.
+            color: AppColors.slate.withOpacityRatio(0.75),
+                             ^^^^^
+lib/screens/dashboard_screen.dart:421:42: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is  
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.secondary.withOpacityRatio(0.16),
+                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:605:40: Error: Member not found: 'slate'.
+                      color: AppColors.slate.withOpacityRatio(0.7),
+                                       ^^^^^
+lib/screens/dashboard_screen.dart:614:52: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is  
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    borderColor: AppColors.primary.withOpacityRatio(0.4),
+                                                   ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:997:47: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is  
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                backgroundColor: Colors.white.withOpacityRatio(0.18),
+                                              ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1016:45: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        color: Colors.white.withOpacityRatio(0.85),
+                                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1046:37: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                color: Colors.white.withOpacityRatio(0.92),
+                                    ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1051:37: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                color: Colors.white.withOpacityRatio(0.92),
+                                    ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1086:51: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        borderColor: Colors.white.withOpacityRatio(0.6),
+                                                  ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1124:22: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        color: color.withOpacityRatio(0.22),
+                     ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1126:48: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        border: Border.all(color: Colors.white.withOpacityRatio(0.32)),
+                                               ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1212:43: Error: Member not found: 'cardBorder'.
+              Border.all(color: AppColors.cardBorder.withOpacityRatio(0.85)),
+                                          ^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1244:34: Error: Member not found: 'slate'.
+                color: AppColors.slate.withOpacityRatio(0.7),
+                                 ^^^^^
+lib/screens/dashboard_screen.dart:1209:31: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+          color: Colors.white.withOpacityRatio(0.95),
+                              ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1264:21: Error: Member not found: 'mint'.
+        : AppColors.mint.withOpacityRatio(0.45);
+                    ^^^^
+lib/screens/dashboard_screen.dart:1267:29: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        : AppColors.primary.withOpacityRatio(0.35);
+                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1325:45: Error: Member not found: 'cardBorder'.
+        border: Border.all(color: AppColors.cardBorder.withOpacityRatio(0.85)),
+                                            ^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1380:72: Error: Member not found: 'slate'.
+                    GoogleFonts.inter(fontSize: 13.5, color: AppColors.slate),
+                                                                       ^^^^^
+lib/screens/dashboard_screen.dart:1402:34: Error: Member not found: 'slate'.
+                color: AppColors.slate.withOpacityRatio(0.65),
+                                 ^^^^^
+lib/screens/dashboard_screen.dart:1345:48: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    color: AppColors.secondary.withOpacityRatio(0.2),
+                                               ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1386:56: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    size: 16, color: AppColors.primary.withOpacityRatio(0.8)),
+                                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/screens/dashboard_screen.dart:1392:46: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                    color: AppColors.primary.withOpacityRatio(0.8),
+                                             ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:43:45: Error: Member not found: 'adminHeaderGradient'.
+                        gradient: AppColors.adminHeaderGradient,
+                                            ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:80:58: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is   
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                                            Colors.white.withOpacityRatio(0.88),
+                                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:242:44: Error: Member not found: 'adminButtonGradient'.
+            gradient: selected ? AppColors.adminButtonGradient : null,
+                                           ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:304:30: Error: Member not found: 'adminSecondaryLight'.
+            color: AppColors.adminSecondaryLight.withOpacityRatio(0.65),
+                             ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:321:30: Error: Member not found: 'slate'.
+            color: AppColors.slate.withOpacityRatio(0.7),
+                             ^^^^^
+lib/widgets/ksu_button.dart:37:44: Error: Member not found: 'buttonGradient'.
+      baseGradient = gradient ?? AppColors.buttonGradient;
+                                           ^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:42:35: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            .map((color) => color.withOpacityRatio(enabled ? 1 : 0.55))
+                                  ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:43:14: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<Color>'.
+ - 'List' is from 'dart:core'.
+ - 'Color' is from 'dart:ui'.
+            .toList(),
+             ^
+lib/widgets/ksu_button.dart:48:26: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        backgroundColor?.withOpacityRatio(enabled ? 1 : 0.6);
+                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:51:40: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            ? baseGradient.colors.last.withOpacityRatio(enabled ? 0.28 : 0.18)
+                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:53:18: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                .withOpacityRatio(enabled ? 0.32 : 0.22));
+                 ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_card.dart:22:30: Error: Member not found: 'cardBorder'.
+            color: AppColors.cardBorder.withOpacityRatio(0.8), width: 1.2),
+                             ^^^^^^^^^^
+lib/widgets/ksu_card.dart:25:30: Error: Member not found: 'cardShadow'.
+            color: AppColors.cardShadow,
+                             ^^^^^^^^^^
+lib/widgets/ksu_card.dart:19:29: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more      
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        color: Colors.white.withOpacityRatio(0.94),
+                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+Performing hot reload...                                                
+Try again after fixing the above error(s).
 
-## MANDATORY REQUIREMENTS:
+lib/theme/app_theme.dart:65:39: Error: The argument type 'CardThemeData' can't be assigned to the parameter type 'CardTheme'.
+ - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart').
+ - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart'). 
+      cardTheme: _buildCardTheme(base.cardTheme),
+                                      ^
+lib/theme/app_theme.dart:92:80: Error: The method 'copyWith' isn't defined for the class 'ElevatedButtonThemeData'.
+ - 'ElevatedButtonThemeData' is from 'package:flutter/src/material/elevated_button_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/elevated_button_theme.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'copyWith'.
+      elevatedButtonTheme: _buildElevatedButtonTheme(base.elevatedButtonTheme).copyWith(
+                                                                               ^^^^^^^^
+lib/theme/app_theme.dart:98:39: Error: The argument type 'CardThemeData' can't be assigned to the parameter type 'CardTheme'.
+ - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart').
+ - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/C:/sdk/Flutter/packages/flutter/lib/src/material/card_theme.dart'). 
+      cardTheme: _buildCardTheme(base.cardTheme),
+                                      ^
+lib/theme/app_theme.dart:99:68: Error: The method 'copyWith' isn't defined for the class 'TextButtonThemeData'.
+ - 'TextButtonThemeData' is from 'package:flutter/src/material/text_button_theme.dart'
+ ('/C:/sdk/Flutter/packages/flutter/lib/src/material/text_button_theme.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'copyWith'.
+      textButtonTheme: _buildTextButtonTheme(base.textButtonTheme).copyWith(
+                                                                   ^^^^^^^^
+lib/widgets/background_pattern.dart:26:59: Error: Member not found: 'backgroundGradient'.
+      decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
+                                                          ^^^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:62:38: Error: Member not found: 'gold'.
+              borderColor: AppColors.gold.withOpacityRatio(0.22),
+                                     ^^^^
+lib/widgets/background_pattern.dart:38:40: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.primary.withOpacityRatio(0.18),
+                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:46:42: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.secondary.withOpacityRatio(0.22),
+                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:54:42: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+              color: AppColors.secondary.withOpacityRatio(0.16),
+                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:75:38: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        Colors.white.withOpacityRatio(0.08),
+                                     ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:77:38: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                        Colors.white.withOpacityRatio(0.08),
+                                     ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:99:26: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is 
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            color: color.withOpacityRatio(0.4),
+                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/background_pattern.dart:142:27: Error: Member not found: 'gold'.
+      ..color = AppColors.gold.withOpacityRatio(opacity)
+                          ^^^^
+lib/screens/admin_dashboard_screen.dart:712:47: Error: Member not found: 'adminButtonGradient'.
+                          gradient: AppColors.adminButtonGradient,
+                                              ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:755:28: Error: Member not found: 'slate'.
+          color: AppColors.slate.withOpacity(0.7),
+                           ^^^^^
+lib/screens/admin_dashboard_screen.dart:791:28: Error: Member not found: 'adminSecondaryLight'.
+          color: AppColors.adminSecondaryLight,
+                           ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:966:24: Error: Member not found: 'adminSecondaryLight'.
+      color: AppColors.adminSecondaryLight.withOpacity(0.3),
+                       ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:985:55: Error: Member not found: 'slate'.
+                          ?.copyWith(color: AppColors.slate)),
+                                                      ^^^^^
+lib/screens/admin_dashboard_screen.dart:996:49: Error: Member not found: 'slate'.
+                    ?.copyWith(color: AppColors.slate.withOpacity(0.9)),
+                                                ^^^^^
+lib/widgets/admin_components.dart:43:45: Error: Member not found: 'adminHeaderGradient'.
+                        gradient: AppColors.adminHeaderGradient,
+                                            ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:80:58: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is
+more specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                                            Colors.white.withOpacityRatio(0.88),
+                                                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:242:44: Error: Member not found: 'adminButtonGradient'.
+            gradient: selected ? AppColors.adminButtonGradient : null,
+                                           ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:304:30: Error: Member not found: 'adminSecondaryLight'.
+            color: AppColors.adminSecondaryLight.withOpacityRatio(0.65),
+                             ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:321:30: Error: Member not found: 'slate'.
+            color: AppColors.slate.withOpacityRatio(0.7),
+                             ^^^^^
+lib/widgets/ksu_button.dart:37:44: Error: Member not found: 'buttonGradient'.
+      baseGradient = gradient ?? AppColors.buttonGradient;
+                                           ^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:42:35: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            .map((color) => color.withOpacityRatio(enabled ? 1 : 0.55))
+                                  ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:43:14: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<Color>'.
+ - 'List' is from 'dart:core'.
+ - 'Color' is from 'dart:ui'.
+            .toList(),
+             ^
+lib/widgets/ksu_button.dart:48:26: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        backgroundColor?.withOpacityRatio(enabled ? 1 : 0.6);
+                         ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:51:40: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+            ? baseGradient.colors.last.withOpacityRatio(enabled ? 0.28 : 0.18)
+                                       ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_button.dart:53:18: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more    
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+                .withOpacityRatio(enabled ? 0.32 : 0.22));
+                 ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/widgets/ksu_card.dart:22:30: Error: Member not found: 'cardBorder'.
+            color: AppColors.cardBorder.withOpacityRatio(0.8), width: 1.2),
+                             ^^^^^^^^^^
+lib/widgets/ksu_card.dart:25:30: Error: Member not found: 'cardShadow'.
+            color: AppColors.cardShadow,
+                             ^^^^^^^^^^
+lib/widgets/ksu_card.dart:19:29: Error: The method 'withOpacityRatio' is defined in multiple extensions for 'Color' and neither is more      
+specific.
+ - 'Color' is from 'dart:ui'.
+Try using an explicit extension application of the wanted extension or hiding unwanted extensions from scope.
+        color: Colors.white.withOpacityRatio(0.94),
+                            ^^^^^^^^^^^^^^^^
+lib/theme/app_theme.dart:6:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+lib/theme/color_extensions.dart:4:9: Context: This is one of the extension members.
+  Color withOpacityRatio(double ratio) {
+        ^^^^^^^^^^^^^^^^
+Performing hot reload...
+Try again after fixing the above error(s).
 
-**SCAN ALL ELEMENTS:**
-- Inspect every line of code, component, and UI element
-- Check all variables, functions, classes for consistency
-- Verify all imports, dependencies, and file structure
-- Validate naming conventions and code organization
+Application finished.
+PS D:\PROJECT\laporan_aktivitas_mobile\mobile> flutter run
+Launching lib\main.dart on sdk gphone64 x86 64 in debug mode...
+lib/screens/splash_screen.dart:7:8: Error: Error when reading 'lib/theme/color_extensions.dart': The system cannot find the file specified.
 
-**FIX OVERFLOW ISSUES:**
-- Ensure no elements exceed container boundaries
-- Implement proper responsive breakpoints (mobile, tablet, desktop)
-- Add CSS overflow controls and text wrapping
-- Test layout stability across screen sizes
+import '../theme/color_extensions.dart';
+       ^
+lib/screens/admin_dashboard_screen.dart:14:8: Error: Error when reading 'lib/theme/color_extensions.dart': The system cannot find the file specified.
 
-**ENSURE PRECISION:**
-- Validate all calculations and logic flows
-- Check data types, variable scoping, and error handling
-- Remove hardcoded values, use constants/variables
-- Verify output formats match specifications exactly
+import '../theme/color_extensions.dart';
+       ^
+lib/widgets/admin_components.dart:4:8: Error: Error when reading 'lib/theme/color_extensions.dart': The system cannot find the file specified.
 
-**MAINTAIN CLEAN STRUCTURE:**
-- Apply consistent indentation (2 spaces recommended)
-- Remove unused code, imports, and variables
-- Group related functions and organize file structure
-- Add proper comments and documentation
+import '../theme/color_extensions.dart';
+       ^
+lib/theme/app_theme.dart:88:56: Error: The method 'copyWith' isn't defined for the class 'ElevatedButtonThemeData'.
+ - 'ElevatedButtonThemeData' is from 'package:flutter/src/material/elevated_button_theme.dart' ('/C:/sdk/Flutter/packages/flutter/lib/src/material/elevated_button_theme.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'copyWith'.
+      elevatedButtonTheme: _buildElevatedButtonTheme().copyWith(
+                                                       ^^^^^^^^
+lib/theme/app_theme.dart:94:48: Error: The method 'copyWith' isn't defined for the class 'TextButtonThemeData'.
+ - 'TextButtonThemeData' is from 'package:flutter/src/material/text_button_theme.dart' ('/C:/sdk/Flutter/packages/flutter/lib/src/material/text_button_theme.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'copyWith'.
+      textButtonTheme: _buildTextButtonTheme().copyWith(
+                                               ^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:712:47: Error: Member not found: 'adminButtonGradient'.
+                          gradient: AppColors.adminButtonGradient,
+                                              ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:755:28: Error: Member not found: 'slate'.
+          color: AppColors.slate.withOpacity(0.7),
+                           ^^^^^
+lib/screens/admin_dashboard_screen.dart:791:28: Error: Member not found: 'adminSecondaryLight'.
+          color: AppColors.adminSecondaryLight,
+                           ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:966:24: Error: Member not found: 'adminSecondaryLight'.
+      color: AppColors.adminSecondaryLight.withOpacity(0.3),
+                       ^^^^^^^^^^^^^^^^^^^
+lib/screens/admin_dashboard_screen.dart:985:55: Error: Member not found: 'slate'.
+                          ?.copyWith(color: AppColors.slate)),
+                                                      ^^^^^
+lib/screens/admin_dashboard_screen.dart:996:49: Error: Member not found: 'slate'.
+                    ?.copyWith(color: AppColors.slate.withOpacity(0.9)),
+                                                ^^^^^
+lib/widgets/admin_components.dart:43:45: Error: Member not found: 'adminHeaderGradient'.
+                        gradient: AppColors.adminHeaderGradient,
+                                            ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:80:58: Error: The method 'withOpacityRatio' isn't defined for the class 'Color'.
+ - 'Color' is from 'dart:ui'.
+Try correcting the name to the name of an existing method, or defining a method named 'withOpacityRatio'.
+                                            Colors.white.withOpacityRatio(0.88),
+                                                         ^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:242:44: Error: Member not found: 'adminButtonGradient'.
+            gradient: selected ? AppColors.adminButtonGradient : null,
+                                           ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:304:30: Error: Member not found: 'adminSecondaryLight'.
+            color: AppColors.adminSecondaryLight.withOpacityRatio(0.65),
+                             ^^^^^^^^^^^^^^^^^^^
+lib/widgets/admin_components.dart:321:30: Error: Member not found: 'slate'.
+            color: AppColors.slate.withOpacityRatio(0.7),
+                             ^^^^^
+Target kernel_snapshot_program failed: Exception
 
-**ELIMINATE RANDOMNESS:**
-- Fix unpredictable behaviors and race conditions
-- Standardize animations, transitions, and timing
-- Implement deterministic outputs for same inputs
-- Add comprehensive error handling and fallbacks
 
-## EXECUTION REQUIREMENTS:
+FAILURE: Build failed with an exception.
 
-1. **Generate working, executable code** - not pseudo-code
-2. **Include complete file structure** with proper imports
-3. **Add responsive CSS** with mobile-first approach
-4. **Implement error boundaries** and input validation
-5. **Provide production-ready output** with optimizations
+* What went wrong:
+Execution failed for task ':app:compileFlutterBuildDebug'.
+> Process 'command 'C:\sdk\Flutter\bin\flutter.bat'' finished with non-zero exit value 1
 
-## RESPONSE FORMAT:
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
 
-```
-AUDIT SUMMARY:
-- Issues found: [number]
-- Critical fixes: [list]
-- Performance improvements: [list]
-
-FIXED CODE:
-[Complete, executable code here]
-
-TESTING CHECKLIST:
-☐ Mobile responsive (320px+)
-☐ No console errors
-☐ All functions executable
-☐ Clean, consistent formatting
-☐ Optimized performance
-```
-
-**PRIORITY**: Deliver functional, production-ready code that works immediately without additional modifications.
-
-Now analyze and fix the following code:
+BUILD FAILED in 33s
+Running Gradle task 'assembleDebug'...                             34.2s
+Error: Gradle task assembleDebug failed with exit code 1

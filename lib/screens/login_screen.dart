@@ -6,10 +6,8 @@ import '../models/app_user.dart';
 import '../services/api_service.dart';
 import '../services/session_service.dart';
 import '../theme/app_theme.dart';
-import '../theme/color_extensions.dart';
 import '../utils/responsive.dart';
 import '../widgets/background_pattern.dart';
-import '../widgets/ksu_button.dart';
 import 'admin_dashboard_screen.dart';
 import 'dashboard_screen.dart';
 
@@ -43,11 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _setMode(LoginMode mode) {
+    if (_loading) return;
     FocusScope.of(context).unfocus();
     setState(() {
       _loginMode = mode;
       _errorMessage = null;
-      _loading = false;
     });
   }
 
@@ -59,6 +57,12 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    setState(() {
+      _loading = true;
+      _errorMessage = null;
+    });
+
+    await Future.delayed(const Duration(seconds: 1));
     final option = _selectedUser!;
     final user = AppUser(
       id: option.id.toString(),
@@ -76,10 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _handleAdminLogin() async {
     final form = _adminFormKey.currentState;
-    if (form == null) {
-      return;
-    }
-    if (!form.validate()) {
+    if (form == null || !form.validate()) {
       return;
     }
 
@@ -124,154 +125,128 @@ class _LoginScreenState extends State<LoginScreen> {
     return BackgroundPattern(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= 900;
-              final maxContentWidth = isWide ? 1100.0 : 520.0;
+        body: LayoutBuilder(builder: (context, constraints) {
+          if (constraints.maxWidth > 800) {
+            return _buildWideLayout();
+          }
+          return _buildNarrowLayout();
+        }),
+      ),
+    );
+  }
 
-              return Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isWide ? 48 : 24,
-                    vertical: isWide ? 32 : 24,
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: maxContentWidth),
-                    child: isWide
-                        ? Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                  child:
-                                      _IntroPanel(isTablet: context.isTablet)),
-                              const SizedBox(width: 36),
-                              ConstrainedBox(
-                                constraints:
-                                    const BoxConstraints(maxWidth: 440),
-                                child: SingleChildScrollView(
-                                  physics: const BouncingScrollPhysics(),
-                                  padding: const EdgeInsets.only(bottom: 32),
-                                  child: _buildLoginCardContent(),
-                                ),
-                              ),
-                            ],
-                          )
-                        : SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: _buildLoginCardContent(),
-                          ),
-                  ),
-                ),
-              );
-            },
+  Widget _buildWideLayout() {
+    return ResponsiveContent(
+      alignment: Alignment.center,
+      child: Row(
+        children: [
+          const Expanded(child: _SideInfoPanel()),
+          Expanded(
+            child: Center(
+              child: _buildMobileContent(),
+            ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNarrowLayout() {
+    return SafeArea(
+      child: Center(
+        child: _buildMobileContent(),
+      ),
+    );
+  }
+
+  Widget _buildMobileContent() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/logo-ksu-ke.png',
+              height: 100,
+            ),
+            const SizedBox(height: 24),
+            _buildTitles(),
+            const SizedBox(height: 24),
+            _buildFormCard(),
+            const SizedBox(height: 24),
+            _buildFooter(),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildLoginCardContent() {
-    final isAdmin = _loginMode == LoginMode.admin;
-    final bool isMobile = context.isMobile;
-    final double radius = isMobile ? 28 : 32;
+  Widget _buildTitles() {
+    final theme = Theme.of(context);
+    return Column(
+      children: [
+        Text(
+          'Sistem Laporan Aktivitas',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: theme.colorScheme.primary,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'KOPERASI SERBA USAHA',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: theme.textTheme.bodyLarge?.color,
+          ),
+        ),
+        Text(
+          'KIRAP ENTREPRENEURSHIP',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: theme.colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(height: 20),
+        _HeadingDivider(),
+      ],
+    );
+  }
 
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF6DE),
-        borderRadius: BorderRadius.circular(radius),
-        border: Border.all(color: const Color(0xFFEADBB5), width: 1.4),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(212, 184, 120, 0.22),
-            blurRadius: 32,
-            offset: Offset(0, 20),
-          ),
-        ],
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : 40,
-        vertical: isMobile ? 28 : 38,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _HeaderLogo(isCompact: isMobile),
-          SizedBox(height: isMobile ? 24 : 32),
-          Text(
-            'Sistem Laporan Aktivitas',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: isMobile ? 22 : 26,
-              fontWeight: FontWeight.w700,
-              color: AppColors.primary,
+  Widget _buildFormCard() {
+    return Card(
+      elevation: 4,
+      shadowColor: Colors.black.withOpacity(0.08),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _ModeSelector(activeMode: _loginMode, onChanged: _setMode),
+            const SizedBox(height: 24),
+            if (_errorMessage != null)
+              _AnimatedMessage(message: _errorMessage!, isError: true),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+              child: _loginMode == LoginMode.user
+                  ? _buildUserSelection()
+                  : _buildAdminForm(),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'KSU KIRAP ENTREPRENEURSHIP',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              letterSpacing: 0.8,
-              fontWeight: FontWeight.w600,
-              color: AppColors.secondaryDeep,
-            ),
-          ),
-          const SizedBox(height: 24),
-          const _HeadingDivider(),
-          const SizedBox(height: 24),
-          Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFFE9F7EE),
-              borderRadius: BorderRadius.circular(26),
-              border: Border.all(color: const Color(0xFFCDE5D6)),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromRGBO(37, 140, 86, 0.12),
-                  blurRadius: 22,
-                  offset: Offset(0, 16),
-                ),
-              ],
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 20 : 28,
-              vertical: isMobile ? 24 : 30,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _ModeSelector(
-                  activeMode: _loginMode,
-                  onChanged: _setMode,
-                ),
-                const SizedBox(height: 24),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 220),
-                  child: _errorMessage == null
-                      ? const SizedBox.shrink()
-                      : _AnimatedMessage(
-                          message: _errorMessage!, isError: true),
-                ),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 260),
-                  child: isAdmin ? _buildAdminForm() : _buildUserSelection(),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 32),
-          Text(
-            '© 2025 KSU Kirap Entrepreneurship',
-            style: GoogleFonts.inter(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: AppColors.neutral.withOpacity(0.8),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -281,68 +256,29 @@ class _LoginScreenState extends State<LoginScreen> {
       key: const ValueKey('user-login'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          'Masuk sebagai Pengguna',
-          textAlign: TextAlign.center,
-          style: GoogleFonts.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: AppColors.primaryDark,
-          ),
-        ),
-        const SizedBox(height: 24),
+        const _DropdownLabel(),
+        const SizedBox(height: 8),
         DropdownButtonFormField<UserOption>(
-          isExpanded: true,
           value: _selectedUser,
-          icon: const Icon(Icons.keyboard_arrow_down_rounded,
-              color: AppColors.primary),
-          decoration: InputDecoration(
+          isExpanded: true,
+          decoration: const InputDecoration(
             hintText: '-- Pilih Nama Anda --',
-            prefixIcon: const Icon(Icons.person_outline),
-            filled: true,
-            fillColor: Colors.white.withOpacity(0.9),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide.none,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                  color: AppColors.cardBorder.withOpacity(0.6), width: 1.2),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: AppColors.primary, width: 2),
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
           ),
-          items: userOptions
-              .map(
-                (user) => DropdownMenuItem(
-                  value: user,
-                  child: Text(
-                    user.name,
-                    style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-                  ),
-                ),
-              )
-              .toList(),
+          items: userOptions.map((user) {
+            return DropdownMenuItem(
+              value: user,
+              child: Text(
+                user.name,
+                style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+              ),
+            );
+          }).toList(),
           onChanged: (value) => setState(() => _selectedUser = value),
         ),
-        const SizedBox(height: 32),
-        KsuButton(
+        const SizedBox(height: 24),
+        _LoginButton(
           onPressed: _loading ? null : _handleUserLogin,
-          label: 'Masuk ke Dashboard',
-          icon: Icons.arrow_forward_ios_rounded,
           isLoading: _loading && _loginMode == LoginMode.user,
-          gradient: const LinearGradient(
-            colors: [AppColors.gold, AppColors.goldDeep],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          foregroundColor: AppColors.primaryDark,
-          shadowColor: AppColors.goldDeep.withOpacityRatio(0.32),
         ),
       ],
     );
@@ -355,253 +291,58 @@ class _LoginScreenState extends State<LoginScreen> {
         key: const ValueKey('admin-login'),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Masuk sebagai Admin',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: AppColors.adminPrimaryDark,
-            ),
-          ),
-          const SizedBox(height: 24),
           TextFormField(
             controller: _emailController,
-            decoration: InputDecoration(
-              labelText: 'Email admin',
-              hintText: 'nama@ksuke.com',
-              prefixIcon: const Icon(Icons.email_outlined),
-              filled: true,
-              fillColor: Colors.white.withOpacity(0.9),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
-                    color: AppColors.cardBorder.withOpacity(0.6), width: 1.2),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide:
-                    const BorderSide(color: AppColors.adminPrimary, width: 2),
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-            ),
+            decoration: const InputDecoration(labelText: 'Email'),
             keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Email wajib diisi';
-              }
-              return null;
-            },
+            validator: (v) => (v?.isEmpty ?? true) ? 'Email wajib diisi' : null,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           TextFormField(
             controller: _passwordController,
-            decoration: InputDecoration(
-              labelText: 'Password',
-              prefixIcon: const Icon(Icons.lock_outline),
-              filled: true,
-              fillColor: Colors.white.withOpacity(0.9),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
-                    color: AppColors.cardBorder.withOpacity(0.6), width: 1.2),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide:
-                    const BorderSide(color: AppColors.adminPrimary, width: 2),
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-            ),
+            decoration: const InputDecoration(labelText: 'Password'),
             obscureText: true,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Password wajib diisi';
-              }
-              return null;
-            },
+            validator: (v) =>
+                (v?.isEmpty ?? true) ? 'Password wajib diisi' : null,
           ),
-          const SizedBox(height: 32),
-          KsuButton(
+          const SizedBox(height: 24),
+          ElevatedButton(
             onPressed: _loading ? null : _handleAdminLogin,
-            label: 'Masuk sebagai Admin',
-            icon: Icons.login_rounded,
-            isLoading: _loading,
-            backgroundColor: AppColors.adminPrimary,
-            foregroundColor: AppColors.adminPrimaryDark,
-            shadowColor: AppColors.adminSecondary.withOpacityRatio(0.26),
+            child: _loading
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                        strokeWidth: 2, color: Colors.white),
+                  )
+                : const Text('Login as Admin'),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildFooter() {
+    return Text(
+      'Dengan berkah Allah SWT',
+      style: Theme.of(context).textTheme.bodySmall,
     );
   }
 }
 
 class _HeadingDivider extends StatelessWidget {
-  const _HeadingDivider();
-
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Container(
-            height: 1.2,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.gold.withOpacityRatio(0.0),
-                  AppColors.gold.withOpacityRatio(0.8),
-                  AppColors.gold.withOpacityRatio(0.0),
-                ],
-              ),
-            ),
-          ),
+        Expanded(child: Container(height: 1, color: AppColors.border)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: CircleAvatar(radius: 3, backgroundColor: AppColors.secondary),
         ),
-        Container(
-          width: 10,
-          height: 10,
-          decoration: const BoxDecoration(
-            color: AppColors.secondary,
-            shape: BoxShape.circle,
-          ),
-        ),
-        Expanded(
-          child: Container(
-            height: 1.2,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.gold.withOpacityRatio(0.0),
-                  AppColors.gold.withOpacityRatio(0.8),
-                  AppColors.gold.withOpacityRatio(0.0),
-                ],
-              ),
-            ),
-          ),
-        ),
+        Expanded(child: Container(height: 1, color: AppColors.border)),
       ],
-    );
-  }
-}
-
-class _IntroPanel extends StatelessWidget {
-  const _IntroPanel({required this.isTablet});
-
-  final bool isTablet;
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Padding(
-      padding: EdgeInsets.only(right: isTablet ? 12 : 24, top: 60, bottom: 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Selamat Datang',
-            style: GoogleFonts.poppins(
-              fontSize: isTablet ? 44 : 52,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              height: 1.2,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'di Sistem Laporan Aktivitas KSU Kirap Entrepreneurship.',
-            style: GoogleFonts.poppins(
-              fontSize: isTablet ? 18 : 22,
-              color: Colors.white.withOpacity(0.85),
-            ),
-          ),
-          const SizedBox(height: 32),
-          Container(
-            height: 4,
-            width: 80,
-            decoration: BoxDecoration(
-              color: AppColors.secondary,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          const Spacer(),
-          Text(
-            'Platform digital untuk memantau dan melaporkan aktivitas harian para pegawai di lapangan secara efisien dan transparan.',
-            style: GoogleFonts.inter(
-              fontSize: isTablet ? 15 : 16,
-              color: Colors.white.withOpacity(0.75),
-              height: 1.6,
-            ),
-          ),
-          const SizedBox(height: 24),
-        ],
-      ),
-    );
-  }
-}
-
-class _HeaderLogo extends StatelessWidget {
-  const _HeaderLogo({required this.isCompact});
-
-  final bool isCompact;
-
-  @override
-  Widget build(BuildContext context) {
-    final double outerSize = isCompact ? 132 : 150;
-    final double innerSize = isCompact ? 108 : 124;
-
-    return SizedBox(
-      width: outerSize,
-      height: outerSize,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: outerSize,
-            height: outerSize,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.secondary.withOpacityRatio(0.18),
-            ),
-          ),
-          Container(
-            width: innerSize,
-            height: innerSize,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                  color: AppColors.gold.withOpacityRatio(0.68), width: 4),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromRGBO(45, 90, 61, 0.18),
-                  blurRadius: 28,
-                  offset: Offset(0, 16),
-                ),
-              ],
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Image.asset(
-              'assets/images/logo-ksu-ke.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -614,155 +355,130 @@ class _ModeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile = MediaQuery.sizeOf(context).width < 520;
-    return Container(
-      padding: EdgeInsets.all(isMobile ? 8 : 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFEFF7ED),
-        borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: const Color(0xFFCFE4D4)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(46, 125, 81, 0.12),
-            blurRadius: 24,
-            offset: Offset(0, 14),
+    final theme = Theme.of(context);
+    return SizedBox(
+      width: double.infinity,
+      child: SegmentedButton<LoginMode>(
+        segments: const <ButtonSegment<LoginMode>>[
+          ButtonSegment<LoginMode>(
+            value: LoginMode.user,
+            label: Text('Staff / User'),
+            icon: Icon(Icons.person_outline),
+          ),
+          ButtonSegment<LoginMode>(
+            value: LoginMode.admin,
+            label: Text('Admin'),
+            icon: Icon(Icons.shield_outlined),
           ),
         ],
-      ),
-      child: Row(
-        children: [
-          _ModeTile(
-            label: 'Staff / User',
-            isActive: activeMode == LoginMode.user,
-            onTap: () => onChanged(LoginMode.user),
-            icon: Icons.groups_rounded,
-            activeBackground: AppColors.secondary,
-            activeTextColor: AppColors.primaryDark,
-            activeBorderColor: AppColors.secondaryDeep.withOpacityRatio(0.6),
-            activeGradient: const LinearGradient(
-              colors: [AppColors.secondary, AppColors.secondaryDeep],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            inactiveBackground: Colors.transparent,
-            inactiveTextColor: AppColors.primaryDark,
-            inactiveBorderColor: AppColors.cardBorder.withOpacity(0.8),
-          ),
-          _ModeTile(
-            label: 'Admin',
-            isActive: activeMode == LoginMode.admin,
-            onTap: () => onChanged(LoginMode.admin),
-            icon: Icons.verified_user_outlined,
-            activeBackground: AppColors.adminPrimary,
-            activeTextColor: AppColors.adminSecondaryLight,
-            activeBorderColor: AppColors.adminSecondary.withOpacityRatio(0.5),
-            activeGradient: const LinearGradient(
-              colors: [AppColors.adminPrimary, AppColors.adminSecondary],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            inactiveBackground: Colors.transparent,
-            inactiveTextColor: AppColors.adminPrimaryDark,
-            inactiveBorderColor: AppColors.adminCardBorder.withOpacity(0.8),
-          ),
-        ],
+        selected: <LoginMode>{activeMode},
+        onSelectionChanged: (Set<LoginMode> newSelection) {
+          onChanged(newSelection.first);
+        },
+        style: SegmentedButton.styleFrom(
+          backgroundColor: theme.colorScheme.primary.withOpacity(0.05),
+          foregroundColor: theme.textTheme.bodyLarge?.color,
+          selectedForegroundColor: theme.colorScheme.onPrimary,
+          selectedBackgroundColor: theme.colorScheme.primary,
+          textStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
 }
 
-class _ModeTile extends StatelessWidget {
-  const _ModeTile({
-    required this.label,
-    required this.isActive,
-    required this.onTap,
-    required this.icon,
-    this.activeBackground,
-    required this.activeTextColor,
-    required this.activeBorderColor,
-    this.activeGradient,
-    this.inactiveBackground,
-    this.inactiveTextColor,
-    this.inactiveBorderColor,
-  });
-
-  final String label;
-  final bool isActive;
-  final VoidCallback onTap;
-  final IconData icon;
-  final Color? activeBackground;
-  final Color activeTextColor;
-  final Color activeBorderColor;
-  final LinearGradient? activeGradient;
-  final Color? inactiveBackground;
-  final Color? inactiveTextColor;
-  final Color? inactiveBorderColor;
+class _DropdownLabel extends StatelessWidget {
+  const _DropdownLabel();
 
   @override
   Widget build(BuildContext context) {
-    final Color resolvedInactiveText = inactiveTextColor ?? AppColors.primary;
-    final Color borderColor = isActive
-        ? activeBorderColor
-        : (inactiveBorderColor ?? AppColors.cardBorder.withOpacityRatio(0.85));
-    final Color? backgroundColor = isActive && activeGradient == null
-        ? activeBackground
-        : (!isActive ? inactiveBackground : null);
-
-    return Expanded(
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 220),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          gradient: isActive ? activeGradient : null,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: borderColor, width: 1.3),
-          boxShadow: isActive
-              ? [
-                  BoxShadow(
-                    color: activeBorderColor.withOpacityRatio(0.28),
-                    blurRadius: 18,
-                    offset: const Offset(0, 10),
-                  ),
-                ]
-              : null,
+    return Row(
+      children: [
+        Icon(Icons.person_search_outlined,
+            size: 18, color: Theme.of(context).colorScheme.primary),
+        const SizedBox(width: 8),
+        Text(
+          'Pilih Nama Anda',
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(20),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isActive
-                          ? Colors.white.withOpacityRatio(0.22)
-                          : (inactiveBackground ?? AppColors.primary)
-                              .withOpacityRatio(0.08),
-                    ),
-                    child: Icon(
-                      icon,
-                      color: isActive ? activeTextColor : resolvedInactiveText,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    label,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: isActive ? activeTextColor : resolvedInactiveText,
-                    ),
-                  ),
-                ],
+      ],
+    );
+  }
+}
+
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({this.onPressed, this.isLoading = false});
+
+  final VoidCallback? onPressed;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+      ),
+      icon: isLoading
+          ? const SizedBox.shrink()
+          : const Icon(Icons.login_rounded, color: Colors.white),
+      label: isLoading
+          ? const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(
+                  strokeWidth: 2.5, color: Colors.white),
+            )
+          : Text(
+              'Masuk ke Dashboard',
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
+    );
+  }
+}
+
+class _SideInfoPanel extends StatelessWidget {
+  const _SideInfoPanel();
+
+  @override
+  Widget build(BuildContext context) {
+    return BackgroundPattern(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(48.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo-ksu-ke.png',
+                height: 120,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Selamat Datang',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'di Sistem Laporan Aktivitas KSU Kirap Entrepreneurship.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  color: Colors.white.withOpacity(0.8),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -778,39 +494,31 @@ class _AnimatedMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isError
-        ? const Color(0xFFFFF1F2)
-        : AppColors.mint.withOpacityRatio(0.45);
-    final borderColor = isError
-        ? const Color(0xFFF87171)
-        : AppColors.primary.withOpacityRatio(0.35);
-    final textColor = isError ? const Color(0xFFDC2626) : AppColors.primary;
+    final theme = Theme.of(context);
+    final color = isError ? theme.colorScheme.error : theme.colorScheme.primary;
 
     return Container(
       key: ValueKey(message),
-      margin: const EdgeInsets.only(bottom: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: color,
-        border: Border.all(color: borderColor),
+        borderRadius: BorderRadius.circular(12),
+        color: color.withOpacity(0.1),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Row(
         children: [
           Icon(
             isError ? Icons.error_outline : Icons.check_circle_outline,
-            color: textColor,
-            size: 18,
+            color: color,
+            size: 20,
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               message,
-              style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: textColor,
-              ),
+              style: theme.textTheme.bodyMedium
+                  ?.copyWith(color: color, fontWeight: FontWeight.w500),
             ),
           ),
         ],

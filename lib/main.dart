@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/splash_screen.dart';
@@ -19,6 +20,14 @@ class ActivityApp extends StatelessWidget {
       title: 'Laporan Aktivitas Harian',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('id', 'ID'),
+      ],
       routes: {
         AppRoutes.login: (_) => const LoginScreen(),
       },

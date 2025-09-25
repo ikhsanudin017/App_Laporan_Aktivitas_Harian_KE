@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
 import '../theme/color_extensions.dart';
+import '../utils/responsive.dart';
 
 class AdminPageShell extends StatelessWidget {
   const AdminPageShell({
@@ -28,19 +29,26 @@ class AdminPageShell extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final theme = Theme.of(context);
+          final horizontalPadding = context.responsiveHorizontalPadding;
+          final bool isMobile = context.isMobile;
           return Scaffold(
             backgroundColor: AppColors.adminBackground,
             floatingActionButton: floatingActionButton,
             body: SafeArea(
               bottom: false,
               child: NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                headerSliverBuilder: (context, _) => [
                   SliverToBoxAdapter(
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.fromLTRB(24, 28, 24, 30),
-                      decoration: const BoxDecoration(
-                        gradient: AppColors.adminHeaderGradient,
+                      padding: EdgeInsets.fromLTRB(
+                        horizontalPadding,
+                        isMobile ? 24 : 28,
+                        horizontalPadding,
+                        isMobile ? 26 : 30,
+                      ),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(28),
                           bottomRight: Radius.circular(28),
@@ -53,90 +61,191 @@ class AdminPageShell extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          LayoutBuilder(
-                            builder: (context, constraints) {
-                              final isCompact = constraints.maxWidth < 640;
-                              final titleBlock = Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    title,
-                                    style:
-                                        theme.textTheme.headlineSmall?.copyWith(
-                                      color: Colors.white,
-                                      height: 1.1,
-                                    ),
-                                  ),
-                                  if (subtitle != null) ...[
-                                    const SizedBox(height: 8),
+                      child: ResponsiveContent(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final isCompact = constraints.maxWidth < 768;
+                                final titleBlock = Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Text(
-                                      subtitle!,
-                                      style:
-                                          theme.textTheme.bodyMedium?.copyWith(
-                                        color:
-                                            Colors.white.withOpacityRatio(0.88),
+                                      title,
+                                      style: theme.textTheme.headlineSmall
+                                          ?.copyWith(
+                                        color: Colors.white,
+                                        height: 1.12,
+                                      ),
+                                    ),
+                                    if (subtitle != null) ...[
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        subtitle!,
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(
+                                          color: Colors.white.withOpacity(0.88),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                );
+
+                                final hasActions =
+                                    actions != null && actions!.isNotEmpty;
+                                if (!hasActions) {
+                                  return titleBlock;
+                                }
+
+                                final wrap = Wrap(
+                                  spacing: 12,
+                                  runSpacing: 12,
+                                  alignment: WrapAlignment.end,
+                                  runAlignment: WrapAlignment.end,
+                                  children: actions!,
+                                );
+
+                                if (isCompact) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      titleBlock,
+                                      const SizedBox(height: 16),
+                                      wrap,
+                                    ],
+                                  );
+                                }
+
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(child: titleBlock),
+                                    const SizedBox(width: 24),
+                                    Flexible(
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: wrap,
                                       ),
                                     ),
                                   ],
-                                ],
-                              );
-
-                              if (actions == null || actions!.isEmpty) {
-                                return titleBlock;
-                              }
-
-                              final actionsWrap = Wrap(
-                                spacing: 12,
-                                runSpacing: 12,
-                                alignment: WrapAlignment.end,
-                                runAlignment: WrapAlignment.end,
-                                children: actions!,
-                              );
-
-                              if (isCompact) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    titleBlock,
-                                    const SizedBox(height: 16),
-                                    actionsWrap,
-                                  ],
                                 );
-                              }
-
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(child: titleBlock),
-                                  Expanded(
-                                      child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: actionsWrap)),
-                                ],
-                              );
-                            },
-                          ),
-                          if (headerBottom != null) ...[
-                            const SizedBox(height: 24),
-                            headerBottom!,
+                              },
+                            ),
+                            if (headerBottom != null) ...[
+                              const SizedBox(height: 24),
+                              headerBottom!,
+                            ],
                           ],
-                        ],
+                        ),
                       ),
                     ),
                   )
                 ],
-                body: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-                  child: body,
+                body: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    horizontalPadding,
+                    24,
+                    horizontalPadding,
+                    24,
+                  ),
+                  child: ResponsiveContent(
+                    child: body,
+                  ),
                 ),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class AdminMetricCard extends StatelessWidget {
+  const AdminMetricCard({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.value,
+    this.trendLabel,
+    this.trendIcon,
+    this.gradient,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+  final String? trendLabel;
+  final IconData? trendIcon;
+  final LinearGradient? gradient;
+
+  @override
+  Widget build(BuildContext context) {
+    final LinearGradient colors = gradient ?? AppColors.adminButtonGradient;
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: colors,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(37, 99, 235, 0.18),
+            blurRadius: 28,
+            offset: Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(22),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacityRatio(0.18),
+              ),
+              child: Icon(icon, color: Colors.white, size: 22),
+            ),
+            const SizedBox(height: 18),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Colors.white,
+                    height: 1.1,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white.withOpacityRatio(0.85),
+                  ),
+            ),
+            if (trendLabel != null) ...[
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Icon(trendIcon ?? Icons.trending_up_rounded,
+                      size: 18, color: Colors.white),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      trendLabel!,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
@@ -148,55 +257,51 @@ class AdminSectionCard extends StatelessWidget {
     required this.child,
     this.title,
     this.trailing,
-    this.padding = const EdgeInsets.all(24),
+    this.padding,
     this.margin,
   });
 
   final Widget child;
   final String? title;
   final Widget? trailing;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isMobile = screenWidth < 768;
 
-    return Container(
-      margin: margin,
-      decoration: BoxDecoration(
-        color: Colors.white,
+    final EdgeInsetsGeometry resolvedPadding = padding ??
+        EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 28, vertical: isMobile ? 20 : 26);
+
+    return Card(
+      margin: margin ?? EdgeInsets.only(bottom: isMobile ? 18 : 24),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppColors.adminCardBorder, width: 1.2),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.adminCardBorder),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(15, 23, 42, 0.06),
-            blurRadius: 26,
-            offset: Offset(0, 14),
-          ),
-        ],
       ),
       child: Padding(
-        padding: padding,
+        padding: resolvedPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (title != null || trailing != null) ...[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   if (title != null)
-                    Expanded(
-                      child: Text(
-                        title!,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: AppColors.adminPrimaryDark,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    )
-                  else
-                    const Spacer(),
+                    Text(
+                      title!,
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w700),
+                    ),
                   if (trailing != null) trailing!,
                 ],
               ),
@@ -226,11 +331,7 @@ class AdminFilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final Color textColor =
-        selected ? Colors.white : AppColors.adminPrimaryDark;
-    final Color borderColor =
-        selected ? Colors.transparent : AppColors.adminCardBorder;
+    final Color textColor = selected ? Colors.white : AppColors.adminPrimary;
 
     return Material(
       color: Colors.transparent,
@@ -242,7 +343,10 @@ class AdminFilterChip extends StatelessWidget {
             gradient: selected ? AppColors.adminButtonGradient : null,
             color: selected ? null : Colors.white,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: borderColor, width: 1.2),
+            border: Border.all(
+              color: selected ? Colors.transparent : AppColors.adminCardBorder,
+              width: 1.2,
+            ),
             boxShadow: selected
                 ? const [
                     BoxShadow(
@@ -263,10 +367,10 @@ class AdminFilterChip extends StatelessWidget {
               ],
               Text(
                 label,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: textColor,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: textColor,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ],
           ),
@@ -292,13 +396,14 @@ class AdminEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isMobile = screenWidth < 720;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.all(22),
+          padding: EdgeInsets.all(isMobile ? 18 : 22),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.adminSecondaryLight.withOpacityRatio(0.65),
@@ -308,18 +413,20 @@ class AdminEmptyState extends StatelessWidget {
         const SizedBox(height: 18),
         Text(
           title,
-          style: theme.textTheme.titleMedium?.copyWith(
-            color: AppColors.adminPrimaryDark,
-            fontWeight: FontWeight.w700,
-          ),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: AppColors.adminPrimaryDark,
+                fontWeight: FontWeight.w700,
+                fontSize: (screenWidth / 30).clamp(18, 22),
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
         Text(
           message,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: AppColors.slate.withOpacityRatio(0.7),
-          ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.slate.withOpacityRatio(0.7),
+                fontSize: (screenWidth / 40).clamp(14, 16),
+              ),
           textAlign: TextAlign.center,
         ),
         if (action != null) ...[

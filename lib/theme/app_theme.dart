@@ -6,6 +6,13 @@ import 'color_extensions.dart';
 class AppColors {
   const AppColors._();
 
+  static const Color background = Color(0xFFFFF8E8);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color textPrimary = Color(0xFF2E3A2F);
+  static const Color textSecondary = Color(0xFF6B7280);
+  static const Color border = Color(0xFFE0D9C6);
+  static const Color success = Color(0xFF16A34A);
+
   static const Color primary = Color(0xFF1F6D44);
   static const Color primaryDark = Color(0xFF13472A);
   static const Color secondary = Color(0xFFF2C94C);
@@ -24,9 +31,9 @@ class AppColors {
   static const Color neutral = Color(0xFF6B7280);
   static const Color neutralSoft = Color(0xFFE5E7EB);
 
-  static const Color adminPrimary = Color(0xFF2962FF);
+  static const Color adminPrimary = Color(0xFF1E3A8A);
   static const Color adminPrimaryDark = Color(0xFF1D2A5C);
-  static const Color adminSecondary = Color(0xFF448AFF);
+  static const Color adminSecondary = Color(0xFF2563EB);
   static const Color adminSecondaryLight = Color(0xFFDBEAFE);
   static const Color adminBackground = Color(0xFFF4F6FB);
   static const Color adminCardBorder = Color(0xFFE2E8F0);
@@ -115,7 +122,10 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.cardSurface,
+        background: AppColors.background,
         error: AppColors.danger,
+        onPrimary: Colors.white,
+        onSurface: AppColors.textPrimary,
       ),
       scaffoldBackgroundColor: Colors.transparent,
       textTheme: textTheme,
@@ -249,9 +259,10 @@ class AppTheme {
         onPrimary: Colors.white,
         secondary: AppColors.adminSecondary,
         onSecondary: Colors.white,
-        tertiary: AppColors.adminAccentPurple,
         surface: Colors.white,
+        background: AppColors.adminBackground,
         error: AppColors.adminAccentRed,
+        onSurface: AppColors.textPrimary,
       ),
       scaffoldBackgroundColor: AppColors.adminBackground,
       textTheme: textTheme,
@@ -260,7 +271,6 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
-        systemOverlayStyle: base.appBarTheme.systemOverlayStyle,
         titleTextStyle: GoogleFonts.poppins(
           textStyle: const TextStyle(
             fontSize: 20,
@@ -274,7 +284,6 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         elevation: 0,
         margin: EdgeInsets.zero,
-        surfaceTintColor: Colors.white,
         shadowColor: const Color.fromRGBO(30, 58, 138, 0.08),
       ),
       dividerTheme: DividerThemeData(

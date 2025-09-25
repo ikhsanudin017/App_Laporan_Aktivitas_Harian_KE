@@ -16,20 +16,12 @@ class BackgroundPattern extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final scale =
         (size.width / 430).clamp(0.65, context.isDesktop ? 1.6 : 1.25);
-    final textureOpacity = context.isDesktop
-        ? 0.12
-        : context.isTablet
-            ? 0.09
-            : 0.06;
 
     return DecoratedBox(
       decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
       child: Stack(
         fit: StackFit.expand,
         children: [
-          CustomPaint(
-            painter: _BackgroundTexturePainter(opacity: textureOpacity),
-          ),
           Positioned(
             top: -120 * scale,
             left: -90 * scale,
@@ -43,7 +35,7 @@ class BackgroundPattern extends StatelessWidget {
             right: -70 * scale,
             child: _rotatedSquare(
               size: 210 * scale,
-              color: AppColors.secondary.withOpacityRatio(0.22),
+              color: AppColors.secondary.withOpacityRatio(0.18),
             ),
           ),
           Positioned(
@@ -51,7 +43,7 @@ class BackgroundPattern extends StatelessWidget {
             left: context.isTablet ? -40 * scale : 20 * scale,
             child: _blurCircle(
               size: 260 * scale,
-              color: AppColors.secondary.withOpacityRatio(0.16),
+              color: AppColors.secondary.withOpacityRatio(0.14),
             ),
           ),
           Positioned(
@@ -129,39 +121,4 @@ class BackgroundPattern extends StatelessWidget {
       ),
     );
   }
-}
-
-class _BackgroundTexturePainter extends CustomPainter {
-  _BackgroundTexturePainter({required this.opacity});
-
-  final double opacity;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = AppColors.gold.withOpacityRatio(opacity)
-      ..strokeWidth = 1
-      ..style = PaintingStyle.stroke;
-
-    const gap = 38.0;
-    for (double x = -size.height; x < size.width * 1.5; x += gap) {
-      canvas.drawLine(
-        Offset(x, 0),
-        Offset(x + size.height, size.height),
-        paint,
-      );
-    }
-
-    for (double y = -size.width; y < size.height * 1.5; y += gap) {
-      canvas.drawLine(
-        Offset(0, y),
-        Offset(size.width, y + size.width),
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _BackgroundTexturePainter oldDelegate) =>
-      oldDelegate.opacity != opacity;
 }

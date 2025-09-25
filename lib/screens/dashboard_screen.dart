@@ -13,7 +13,6 @@ import '../models/report.dart';
 import '../services/api_service.dart';
 import '../services/session_service.dart';
 import '../theme/app_theme.dart';
-import '../theme/color_extensions.dart';
 import '../utils/responsive.dart';
 import '../widgets/background_pattern.dart';
 import '../widgets/ksu_button.dart';
@@ -158,7 +157,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     return BackgroundPattern(
       addScrollGradient: true,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         body: SafeArea(
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -166,30 +164,35 @@ class _DashboardScreenState extends State<DashboardScreen>
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: context.isMobile ? 24 : 32,
+                      horizontal: context.responsiveHorizontalPadding,
                       vertical: context.isMobile ? 16 : 24,
                     ),
-                    child: _DashboardHeader(
-                      user: _user,
-                      dateLabel: DateFormat('EEEE, dd MMMM yyyy', 'id_ID')
-                          .format(_currentTime),
-                      onLogout: _submitting || _loadingReport ? null : _logout,
-                      onExport: _exportHistory,
-                      showLogoutButton: widget.showLogoutButton,
+                    child: ResponsiveContent(
+                      child: _DashboardHeader(
+                        user: _user,
+                        dateLabel: DateFormat('EEEE, dd MMMM yyyy', 'id_ID')
+                            .format(_currentTime),
+                        onLogout:
+                            _submitting || _loadingReport ? null : _logout,
+                        onExport: _exportHistory,
+                        showLogoutButton: widget.showLogoutButton,
+                      ),
                     ),
                   ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: context.isMobile ? 24 : 32,
+                      horizontal: context.responsiveHorizontalPadding,
                     ),
-                    child: _StatisticRow(
-                      selectedDate: DateFormat('dd MMM yyyy', 'id_ID')
-                          .format(_selectedDate),
-                      filledCount: _filledFieldCount,
-                      historyCount: _history.length,
-                      role: _user.role,
+                    child: ResponsiveContent(
+                      child: _StatisticRow(
+                        selectedDate: DateFormat('dd MMM yyyy', 'id_ID')
+                            .format(_selectedDate),
+                        filledCount: _filledFieldCount,
+                        historyCount: _history.length,
+                        role: _user.role,
+                      ),
                     ),
                   ),
                 ),
@@ -199,9 +202,11 @@ class _DashboardScreenState extends State<DashboardScreen>
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: context.isMobile ? 16 : 32,
+                      horizontal: context.responsiveHorizontalPadding,
                     ),
-                    child: _buildTabSelector(context),
+                    child: ResponsiveContent(
+                      child: _buildTabSelector(context),
+                    ),
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -223,28 +228,22 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Widget _buildTabSelector(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacityRatio(0.78),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.cardBorder.withOpacityRatio(0.9)),
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: theme.dividerColor),
       ),
       child: TabBar(
         controller: _tabController,
         indicator: BoxDecoration(
-          gradient: AppColors.buttonGradient,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(45, 90, 61, 0.18),
-              blurRadius: 18,
-              offset: Offset(0, 10),
-            ),
-          ],
+          color: theme.colorScheme.secondary,
+          borderRadius: BorderRadius.circular(14),
         ),
         indicatorSize: TabBarIndicatorSize.tab,
         labelColor: Colors.white,
-        unselectedLabelColor: AppColors.primary,
+        unselectedLabelColor: theme.colorScheme.primary,
         labelStyle: GoogleFonts.poppins(
           fontWeight: FontWeight.w600,
           fontSize: 14,
@@ -259,34 +258,40 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Widget _buildInputView(BuildContext context) {
+    final horizontalPadding = context.responsiveHorizontalPadding;
+    final scrollPadding =
+        EdgeInsets.symmetric(horizontal: horizontalPadding).add(
+      EdgeInsets.only(
+        top: context.isMobile ? 12 : 20,
+        bottom: 120,
+      ),
+    );
     return RefreshIndicator(
       onRefresh: _loadLatestForDate,
       edgeOffset: 120,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.fromLTRB(
-          context.isMobile ? 20 : 32,
-          context.isMobile ? 12 : 20,
-          context.isMobile ? 20 : 32,
-          120,
-        ),
-        child: KsuCard(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.isMobile ? 22 : 32,
-            vertical: context.isMobile ? 24 : 32,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildFormHeader(context),
-              const SizedBox(height: 24),
-              _buildFieldsSection(context),
-              const SizedBox(height: 28),
-              if (_statusMessage != null)
-                StatusBanner(message: _statusMessage!, isError: _statusIsError),
-              const SizedBox(height: 28),
-              _buildActionButtons(context),
-            ],
+        padding: scrollPadding,
+        child: ResponsiveContent(
+          child: KsuCard(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.isMobile ? 22 : 32,
+              vertical: context.isMobile ? 24 : 32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildFormHeader(context),
+                const SizedBox(height: 24),
+                _buildFieldsSection(context),
+                const SizedBox(height: 28),
+                if (_statusMessage != null)
+                  StatusBanner(
+                      message: _statusMessage!, isError: _statusIsError),
+                const SizedBox(height: 28),
+                _buildActionButtons(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -295,10 +300,6 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   Widget _buildActionButtons(BuildContext context) {
     final isEditing = _editingReport != null;
-    final buttonStyle = ElevatedButton.styleFrom(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      textStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-    );
 
     if (context.isMobile) {
       return Column(
@@ -312,18 +313,14 @@ class _DashboardScreenState extends State<DashboardScreen>
                     ? Icons.check_circle_outline
                     : Icons.save_outlined),
             label: Text(isEditing ? 'Perbarui Laporan' : 'Simpan Laporan'),
-            style: buttonStyle.copyWith(
-                backgroundColor: WidgetStateProperty.all(AppColors.accent)),
+            style:
+                ElevatedButton.styleFrom(backgroundColor: AppColors.secondary),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: _submitting ? null : _resetForm,
             icon: const Icon(Icons.refresh),
             label: const Text('Reset Form'),
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              textStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-            ),
           ),
           if (isEditing) ...[
             const SizedBox(height: 8.0),
@@ -357,13 +354,13 @@ class _DashboardScreenState extends State<DashboardScreen>
               : Icon(
                   isEditing ? Icons.check_circle_outline : Icons.save_outlined),
           label: Text(isEditing ? 'Perbarui' : 'Simpan'),
-          style: buttonStyle,
         ),
       ],
     );
   }
 
   Widget _buildFormHeader(BuildContext context) {
+    final theme = Theme.of(context);
     final config = _formConfig;
     final dateLabel = DateFormat('dd MMMM yyyy', 'id_ID').format(_selectedDate);
     return Column(
@@ -371,19 +368,12 @@ class _DashboardScreenState extends State<DashboardScreen>
       children: [
         Text(
           config?.title ?? 'Form Laporan Harian',
-          style: GoogleFonts.poppins(
-            fontSize: context.isMobile ? 20 : 22,
-            fontWeight: FontWeight.w700,
-            color: AppColors.primary,
-          ),
+          style: theme.textTheme.headlineSmall,
         ),
         const SizedBox(height: 8),
         Text(
           'Tanggal laporan: $dateLabel',
-          style: GoogleFonts.inter(
-            fontSize: 14,
-            color: AppColors.slate.withOpacityRatio(0.75),
-          ),
+          style: theme.textTheme.bodyMedium,
         ),
         const SizedBox(height: 18),
         Wrap(
@@ -400,9 +390,8 @@ class _DashboardScreenState extends State<DashboardScreen>
               icon: const Icon(Icons.wb_sunny_outlined),
               label: const Text('Hari Ini'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.secondary,
-                foregroundColor: AppColors.primaryDark,
-              ),
+                  backgroundColor: AppColors.surface,
+                  foregroundColor: AppColors.textPrimary),
             ),
             ElevatedButton.icon(
               onPressed: _loadingReport ? null : _loadLatestForDate,
@@ -418,23 +407,23 @@ class _DashboardScreenState extends State<DashboardScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(
-              color: AppColors.secondary.withOpacityRatio(0.16),
+              color: theme.colorScheme.secondary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                  color: theme.colorScheme.secondary.withOpacity(0.3)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.edit_note_outlined,
-                    color: AppColors.primary, size: 20),
+                Icon(Icons.edit_note_outlined,
+                    color: theme.colorScheme.secondary, size: 20),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Mengedit laporan tanggal ${DateFormat('dd MMM yyyy', 'id_ID').format(_editingReport!.date)}',
-                    style: GoogleFonts.inter(
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primaryDark,
-                    ),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.secondary,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ],
@@ -552,83 +541,82 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Widget _buildHistoryView(BuildContext context) {
+    final horizontalPadding = context.responsiveHorizontalPadding;
+    final listPadding = EdgeInsets.symmetric(horizontal: horizontalPadding).add(
+      EdgeInsets.only(
+        top: context.isMobile ? 12 : 20,
+        bottom: 120,
+      ),
+    );
+    final List<Widget> content = [];
+    if (_loadingHistory) {
+      content.add(const Padding(
+        padding: EdgeInsets.symmetric(vertical: 32),
+        child: Center(
+          child: SizedBox(
+            width: 32,
+            height: 32,
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ));
+    } else if (_history.isEmpty) {
+      content.add(KsuCard(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.inbox_outlined,
+                size: 48, color: Theme.of(context).colorScheme.primary),
+            const SizedBox(height: 16),
+            Text(
+              'Belum ada riwayat laporan tersimpan.',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Tarik untuk menyegarkan atau tekan tombol di bawah ini.',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 20),
+            OutlinedButton.icon(
+              onPressed: _loadHistory,
+              label: const Text('Muat Riwayat'),
+              icon: const Icon(Icons.refresh),
+            ),
+          ],
+        ),
+      ));
+    } else {
+      content.addAll(_history.map(
+        (report) => Padding(
+          padding: const EdgeInsets.only(bottom: 18),
+          child: _HistoryTile(
+            report: report,
+            onEdit: () => _startEditing(report),
+            onDelete: () => _confirmDelete(report),
+            summary: _buildSummary(report.reportData),
+            relativeTime: _relativeTime(report.updatedAt),
+          ),
+        ),
+      ));
+    }
+    if (content.isEmpty) {
+      content.add(const SizedBox.shrink());
+    }
     return RefreshIndicator(
       onRefresh: _loadHistory,
       edgeOffset: 120,
       child: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.fromLTRB(
-          context.isMobile ? 20 : 32,
-          context.isMobile ? 12 : 20,
-          context.isMobile ? 20 : 32,
-          120,
-        ),
+        padding: listPadding,
         children: [
-          if (_loadingHistory)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32),
-              child: Center(
-                child: SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: CircularProgressIndicator(color: AppColors.primary),
-                ),
-              ),
-            )
-          else if (_history.isEmpty)
-            KsuCard(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.inbox_outlined,
-                      size: 48, color: AppColors.primary),
-                  const SizedBox(height: 16),
-                  Text(
-                    'لا توجد سجلات تقارير',
-                    style: GoogleFonts.amiri(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primaryDark),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Belum ada riwayat laporan tersimpan.',
-                    style: GoogleFonts.poppins(
-                        fontSize: 14, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Tarik untuk menyegarkan atau tekan tombol di bawah ini.',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      fontSize: 13,
-                      color: AppColors.slate.withOpacityRatio(0.7),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  KsuSecondaryButton(
-                    onPressed: _loadHistory,
-                    label: 'تحديث السجل - Muat Riwayat',
-                    icon: Icons.refresh,
-                    foregroundColor: AppColors.primary,
-                    borderColor: AppColors.primary.withOpacityRatio(0.4),
-                  ),
-                ],
-              ),
-            )
-          else
-            ..._history.map(
-              (report) => Padding(
-                padding: const EdgeInsets.only(bottom: 18),
-                child: _HistoryTile(
-                  report: report,
-                  onEdit: () => _startEditing(report),
-                  onDelete: () => _confirmDelete(report),
-                  summary: _buildSummary(report.reportData),
-                  relativeTime: _relativeTime(report.updatedAt),
-                ),
-              ),
+          ResponsiveContent(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: content,
             ),
+          ),
         ],
       ),
     );
@@ -877,6 +865,8 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(true),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: AppColors.danger),
               child: const Text('Hapus'),
             ),
           ],
@@ -966,6 +956,7 @@ class _DashboardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final initials = _initials(user.name);
     return Container(
       padding: EdgeInsets.symmetric(
@@ -973,17 +964,17 @@ class _DashboardHeader extends StatelessWidget {
         vertical: context.isMobile ? 20 : 26,
       ),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF13472A), Color(0xFF1F6D44)],
+        gradient: LinearGradient(
+          colors: [theme.colorScheme.primary, AppColors.primaryDark],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(28),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color.fromRGBO(42, 84, 60, 0.22),
+            color: theme.colorScheme.primary.withOpacity(0.22),
             blurRadius: 32,
-            offset: Offset(0, 18),
+            offset: const Offset(0, 18),
           ),
         ],
       ),
@@ -994,7 +985,7 @@ class _DashboardHeader extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: context.isMobile ? 26 : 30,
-                backgroundColor: Colors.white.withOpacityRatio(0.18),
+                backgroundColor: Colors.white.withOpacity(0.18),
                 child: Text(
                   initials,
                   style: GoogleFonts.poppins(
@@ -1010,10 +1001,10 @@ class _DashboardHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'مرحباً - Selamat datang,',
-                      style: GoogleFonts.amiri(
-                        fontSize: 18,
-                        color: Colors.white.withOpacityRatio(0.85),
+                      'Selamat datang,',
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        color: Colors.white.withOpacity(0.85),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -1038,17 +1029,14 @@ class _DashboardHeader extends StatelessWidget {
               _HeaderChip(
                 icon: Icons.shield_moon_outlined,
                 label: user.role,
-                color: Colors.white,
               ),
               _HeaderChip(
                 icon: Icons.calendar_today_outlined,
                 label: dateLabel,
-                color: Colors.white.withOpacityRatio(0.92),
               ),
               _HeaderChip(
                 icon: Icons.cloud_done_outlined,
                 label: 'Sinkron otomatis',
-                color: Colors.white.withOpacityRatio(0.92),
               ),
             ],
           ),
@@ -1064,26 +1052,26 @@ class _DashboardHeader extends StatelessWidget {
                   children: [
                     KsuButton(
                       onPressed: onExport,
-                      label: 'تصدير - Export',
+                      label: 'Export',
                       icon: Icons.download_outlined,
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: theme.colorScheme.secondary,
                       foregroundColor: Colors.white,
                     ),
                     if (showLogoutButton)
                       KsuButton(
                         onPressed: onLogout,
-                        label: 'خروج - Logout',
+                        label: 'Logout',
                         icon: Icons.logout_rounded,
                         backgroundColor: AppColors.danger,
                         foregroundColor: Colors.white,
                       )
                     else
-                      KsuSecondaryButton(
+                      KsuButton(
                         onPressed: () => Navigator.of(context).maybePop(),
                         label: 'Kembali',
                         icon: Icons.arrow_back_ios_new,
+                        backgroundColor: Colors.white.withOpacity(0.2),
                         foregroundColor: Colors.white,
-                        borderColor: Colors.white.withOpacityRatio(0.6),
                       ),
                   ],
                 ),
@@ -1109,21 +1097,19 @@ class _DashboardHeader extends StatelessWidget {
 }
 
 class _HeaderChip extends StatelessWidget {
-  const _HeaderChip(
-      {required this.icon, required this.label, required this.color});
+  const _HeaderChip({required this.icon, required this.label});
 
   final IconData icon;
   final String label;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: color.withOpacityRatio(0.22),
+        color: Colors.white.withOpacity(0.22),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withOpacityRatio(0.32)),
+        border: Border.all(color: Colors.white.withOpacity(0.32)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -1159,31 +1145,48 @@ class _StatisticRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 16,
-      runSpacing: 16,
-      children: [
-        _StatisticCard(
-          icon: Icons.calendar_month,
-          label: 'Tanggal Aktif',
-          value: selectedDate,
-        ),
-        _StatisticCard(
-          icon: Icons.task_alt_rounded,
-          label: 'Kolom Terisi',
-          value: '$filledCount bidang',
-        ),
-        _StatisticCard(
-          icon: Icons.history_rounded,
-          label: 'Riwayat Tersimpan',
-          value: '$historyCount laporan',
-        ),
-        _StatisticCard(
-          icon: Icons.workspace_premium_outlined,
-          label: 'Peran Aktif',
-          value: role,
-        ),
-      ],
+    final cards = [
+      _StatisticCard(
+        icon: Icons.calendar_month,
+        label: 'Tanggal Aktif',
+        value: selectedDate,
+      ),
+      _StatisticCard(
+        icon: Icons.task_alt_rounded,
+        label: 'Kolom Terisi',
+        value: '$filledCount bidang',
+      ),
+      _StatisticCard(
+        icon: Icons.history_rounded,
+        label: 'Riwayat Tersimpan',
+        value: '$historyCount laporan',
+      ),
+      _StatisticCard(
+        icon: Icons.workspace_premium_outlined,
+        label: 'Peran Aktif',
+        value: role,
+      ),
+    ];
+
+    if (!context.isMobile) {
+      return Wrap(
+        spacing: 16,
+        runSpacing: 16,
+        children: cards,
+      );
+    }
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: cards.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 1.5,
+      ),
+      itemBuilder: (context, index) => cards[index],
     );
   }
 }
@@ -1201,48 +1204,24 @@ class _StatisticCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(minWidth: 160),
-      child: Container(
+    final theme = Theme.of(context);
+    return Card(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacityRatio(0.95),
-          borderRadius: BorderRadius.circular(20),
-          border:
-              Border.all(color: AppColors.cardBorder.withOpacityRatio(0.85)),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(15, 23, 42, 0.05),
-              blurRadius: 18,
-              offset: Offset(0, 10),
-            ),
-          ],
-        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(icon, color: AppColors.primaryDark, size: 20),
-              ],
-            ),
+            Icon(icon, color: theme.colorScheme.primary, size: 20),
             const SizedBox(height: 12),
             Text(
               value,
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppColors.primaryDark,
-              ),
+              style: theme.textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 4),
             Text(
               label,
-              style: GoogleFonts.inter(
-                fontSize: 12,
-                color: AppColors.slate.withOpacityRatio(0.7),
-              ),
+              style: theme.textTheme.bodySmall,
             ),
           ],
         ),
@@ -1259,33 +1238,27 @@ class StatusBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = isError
-        ? const Color(0xFFFFF1F2)
-        : AppColors.mint.withOpacityRatio(0.45);
-    final Color borderColor = isError
-        ? const Color(0xFFF87171)
-        : AppColors.primary.withOpacityRatio(0.35);
-    final Color textColor =
-        isError ? const Color(0xFFDC2626) : AppColors.primary;
+    final theme = Theme.of(context);
+    final color = isError ? theme.colorScheme.error : AppColors.success;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 18),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
       decoration: BoxDecoration(
-        color: color,
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: borderColor),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Row(
         children: [
           Icon(isError ? Icons.error_outline : Icons.check_circle_outline,
-              color: textColor, size: 18),
+              color: color, size: 18),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               message,
-              style: GoogleFonts.inter(
-                  fontSize: 14, fontWeight: FontWeight.w500, color: textColor),
+              style: theme.textTheme.bodyMedium
+                  ?.copyWith(color: color, fontWeight: FontWeight.w500),
             ),
           ),
         ],
@@ -1311,26 +1284,13 @@ class _HistoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final formattedDate =
         DateFormat('dd MMM yyyy', 'id_ID').format(report.date);
-    final createdAt =
-        DateFormat('dd MMM yyyy HH:mm', 'id_ID').format(report.createdAt);
+    final createdAt = DateFormat('dd MMM yyyy HH:mm', 'id_ID')
+        .format(report.createdAt.toLocal());
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Colors.white, Color.fromRGBO(232, 245, 232, 0.7)],
-        ),
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: AppColors.cardBorder.withOpacityRatio(0.85)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(15, 23, 42, 0.06),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
+    return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
         child: Column(
@@ -1342,15 +1302,14 @@ class _HistoryTile extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: AppColors.secondary.withOpacityRatio(0.2),
+                    color: theme.colorScheme.secondary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
                     formattedDate,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primaryDark,
-                    ),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.secondary,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
                 const Spacer(),
@@ -1367,8 +1326,8 @@ class _HistoryTile extends StatelessWidget {
                     PopupMenuItem(value: 'edit', child: Text('Edit')),
                     PopupMenuItem(value: 'delete', child: Text('Hapus')),
                   ],
-                  child: const Icon(Icons.more_vert_rounded,
-                      color: AppColors.primary),
+                  icon: Icon(Icons.more_vert_rounded,
+                      color: theme.colorScheme.primary),
                 ),
               ],
             ),
@@ -1376,31 +1335,24 @@ class _HistoryTile extends StatelessWidget {
             if (summary.isNotEmpty)
               Text(
                 summary,
-                style:
-                    GoogleFonts.inter(fontSize: 13.5, color: AppColors.slate),
+                style: theme.textTheme.bodyMedium,
               ),
             const SizedBox(height: 8),
             Row(
               children: [
                 Icon(Icons.schedule,
-                    size: 16, color: AppColors.primary.withOpacityRatio(0.8)),
+                    size: 16, color: theme.textTheme.bodySmall?.color),
                 const SizedBox(width: 6),
                 Text(
                   'Diperbarui $relativeTime',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: AppColors.primary.withOpacityRatio(0.8),
-                  ),
+                  style: theme.textTheme.bodySmall,
                 ),
               ],
             ),
             const SizedBox(height: 4),
             Text(
               'Dibuat: $createdAt',
-              style: GoogleFonts.inter(
-                fontSize: 12,
-                color: AppColors.slate.withOpacityRatio(0.65),
-              ),
+              style: theme.textTheme.bodySmall?.copyWith(fontSize: 12),
             ),
           ],
         ),
